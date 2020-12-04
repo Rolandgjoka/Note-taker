@@ -6,7 +6,7 @@ const fs = require("fs");
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("public"));
@@ -25,12 +25,12 @@ app.get("./notes", function (req, res) {
 
 
 
-app.get("./api/notes", async function (req, res) {
+app.get("/api/notes", async function (req, res) {
     const noteData = await getNotes();
     return res.status(200).json(noteData);
 });
 
-app.post("./api/notes", async function (req, res) {
+app.post("/api/notes", async function (req, res) {
     let newNote = req.body;
     const noteData = await getNotes();
 
@@ -43,7 +43,7 @@ app.post("./api/notes", async function (req, res) {
 });
 
 
-app.delete("./api/notes/:id", async function (req, res) {
+app.delete("/api/notes/:id", async function (req, res) {
     let noteID = Number(req.params.id);
     const noteData = await getNotes();
 
